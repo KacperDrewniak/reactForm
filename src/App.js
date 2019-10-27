@@ -18,12 +18,43 @@ class App extends React.Component {
   }
   handleSubmit =(e)=>{
     e.preventDefault()
+
+    const validation = this.formValidation()
+    console.log(validation)
+
   }
+
+
+  formValidation = () =>{
+    let username = false;
+    let email = false;
+    let password = false;
+    let accept = false;
+    let correct = false;
+    
+    if(this.state.username.lenght >=8)username=true;
+    if(this.state.email.indexOf('@')!==-1)email=true;
+    if(this.state.password.length === 8)password=true;
+    if(this.state.accept)accept=true;
+    if(username && email && password && accept)correct=true;
+
+    return({
+      correct,
+      username,
+      password,
+      accept,
+      email,
+    })
+
+
+  }
+
+
   messages={
     username_incorrecet:'Nazwa musi być dłużasza niż 10 ',
-    email_inoccrect:"Musi zawierać @ w emailu",
+    email_incorrecet:"Musi zawierać @ w emailu",
     password_incorrect:"Hasło musi mieć minimum 8 znaków",
-    accept_incorreeect:"not potwierdzoned wszelaka of zgoda gościu"
+    accept_incorrect:"not potwierdzoned wszelaka of zgoda gościu"
   }
 
   handleChange =(e)=>{
@@ -64,12 +95,13 @@ class App extends React.Component {
 
         <label htmlFor="password">Twoje Haseło
         <input type="password" id="user" name="password" value={this.state.password} onChange={this.handleChange} />
-          {this.state.errors.password && <span>{this.messages.password_incorrecet}</span>}
+          {this.state.errors.password && <span>{this.messages.password_incorrect}</span>}
         </label>
 
         <label htmlFor="accept">Wyrażam wszelaką zgodę
 
-          <input type="checkbox" name="accept" id="accept" checked={this.state.value} onChange={this.handleChange}/>
+          <input type="checkbox" name="accept" id="accept" checked={this.state.accept} onChange={this.handleChange}/>
+          {this.state.errors.accept && <span>{this.messages.accept_incorrect}</span>}
         </label>
 
       <button>Zapisz się</button>
