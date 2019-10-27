@@ -1,0 +1,11 @@
+form {
+  margin: 20px;
+}
+
+label {
+  display: block
+}
+
+input {
+  margin-left: 30px;
+}
