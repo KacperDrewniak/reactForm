@@ -32,7 +32,7 @@ class App extends React.Component {
     let accept = false;
     let correct = false;
     
-    if(this.state.username.lenght >=8)username=true;
+    if(this.state.username.length >8)username=true;
     if(this.state.email.indexOf('@')!==-1)email=true;
     if(this.state.password.length === 8)password=true;
     if(this.state.accept)accept=true;
